@@ -1,0 +1,135 @@
+syntax = "proto3";
+
+package ay.twi.graphql.msg;
+
+option go_package = "twi-graphql/msg";
+option java_multiple_files = true;
+option java_package = "ay.twi.graphql.msg";
+option swift_prefix = "XGqlMsg";
+
+import "twi/component.proto";
+import "twi/user.proto";
+
+
+message MediaEntities {
+  repeated Media media = 1;
+  // gotags: json:"user_mentions"
+  repeated UserMention userMentions = 2;
+  repeated Url urls = 3;
+  repeated Hashtag hashtags = 4;
+  repeated Symbol symbols = 5;
+}
+
+message Media {
+  // gotags: json:"display_url"`
+  string displayUrl = 1;
+  // gotags: json:"expanded_url"`
+  string expandedUrl = 2;
+  // gotags: json:"id_str"`
+  string idStr = 3;
+  repeated int64 indices = 4;
+  // gotags: json:"media_key"`
+  string mediaKey = 5;
+  // gotags: json:"media_url_https"`
+  string mediaUrlHttps = 6;
+  string type = 7;
+  string url = 8;
+  // gotags: json:"additional_media_info"`
+  AdditionalMediaInfo additionalMediaInfo = 9;
+  // gotags: json:"ext_media_availability"`
+  ExtMediaAvailability extMediaAvailability = 10;
+  Sizes sizes = 11;
+  // gotags: json:"original_info"`
+  OriginalInfo originalInfo = 12;
+  // gotags: json:"video_info"`
+  VideoInfo videoInfo = 13;
+  // gotags: json:"source_status_id_str"`
+  string sourceStatusIdStr = 14;
+  // gotags: json:"source_user_id_str"`
+  string sourceUserIdStr = 15;
+  Features features = 16;
+  // gotags: json:"ext_alt_text"`
+  string extAltText = 17;
+}
+
+message AdditionalMediaInfo {
+  bool monetizable = 1;
+  // gotags: json:"source_user"
+  SourceUser sourceUser = 2;
+  string title = 3;
+  string description = 4;
+  bool embeddable = 5;
+}
+
+message SourceUser {
+  // gotags: json:"user_results"
+  UserResult userResults = 1;
+}
+
+message ExtMediaAvailability {
+  string status = 1;
+}
+
+message OriginalInfo {
+  int64 height = 1;
+  int64 width = 2;
+  // gotags: json:"focus_rects"
+  repeated FacesSpec focusRects = 3;
+}
+
+message VideoInfo {
+  // gotags: json:"aspect_ratio"
+  repeated int64 aspectRatio = 1;
+  // gotags: json:"duration_millis"
+  int64 durationMillis = 2;
+  repeated Variant variants = 3;
+}
+
+message Variant {
+  int64 bitrate = 1;
+  // gotags: json:"content_type"
+  string contentType = 2;
+  string url = 3;
+}
+
+message Sizes {
+  SizeSpec large = 1;
+  SizeSpec medium = 2;
+  SizeSpec small = 3;
+  SizeSpec thumb = 4;
+}
+
+message Features {
+  Feature large = 1;
+  Feature medium = 2;
+  Feature small = 3;
+  Feature orig = 4;
+}
+
+message Feature {
+  repeated FacesSpec faces = 1;
+}
+
+message SizeSpec {
+  int64 h = 1;
+  int64 w = 2;
+  string resize = 3;
+}
+
+message FacesSpec {
+  int64 x = 1;
+  int64 y = 2;
+  int64 w = 3;
+  int64 h = 4;
+}
+
+message InlineMediaData {
+  // gotags: json:"inline_media"
+  repeated InlineMedia inlineMedia = 1;
+}
+
+message InlineMedia {
+  // gotags: json:"media_id"
+  string mediaId = 1;
+  int64 index = 2;
+}

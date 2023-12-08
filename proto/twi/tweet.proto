@@ -1,0 +1,171 @@
+syntax = "proto3";
+
+package ay.twi.graphql.msg;
+
+option go_package = "twi-graphql/msg";
+option java_multiple_files = true;
+option java_package = "ay.twi.graphql.msg";
+option swift_prefix = "XGqlMsg";
+
+import "twi/component.proto";
+import "twi/media.proto";
+import "twi/user.proto";
+
+
+message TweetResults {
+  TweetResultsDetail result = 1;
+}
+
+message TweetResultsDetail {
+  // gotags: json:"__typename"
+  string typename = 1;
+  // gotags: json:"rest_id"
+  string restId = 2;
+  TweetResultsResultCore core = 3;
+  // gotags: json:"edit_control"
+  EditControl editControl = 4;
+  // gotags: json:"is_translatable"
+  bool isTranslatable = 5;
+  Views views = 6;
+  string source = 7;
+  TweetLegacy legacy = 8;
+  // gotags: json:"quoted_status_result"
+  QuotedStatusResult quotedStatusResult = 9;
+  // gotags: json:"previous_counts"
+  GraphPublicMetrics previousCounts = 10;
+  // gotags: json:"unmention_data"
+  bytes unmentionData = 11;
+  // gotags: json:"quick_promote_eligibility"
+  QuickPromoteEligibility quickPromoteEligibility = 12;
+}
+
+message TweetResultsResultCore {
+  // gotags: json:"user_results"
+  UserResult userResults = 1;
+}
+
+message TweetLegacy {
+  // gotags: json:"bookmark_count"
+  int64 bookmarkCount = 1;
+  bool bookmarked = 2;
+  // gotags: json:"created_at"
+  string createdAt = 3;
+  // gotags: json:"conversation_id_str"
+  string conversationIdStr = 4;
+  // gotags: json:"display_text_range"
+  repeated int64 displayTextRange = 5;
+  MediaEntities entities = 6;
+  // gotags: json:"extended_entities"
+  MediaEntities extendedEntities = 7;
+  // gotags: json:"favorite_count"
+  int64 favoriteCount = 8;
+  bool favorited = 9;
+  // gotags: json:"full_text"
+  string fullText = 10;
+  // gotags: json:"is_quote_status"
+  bool isQuoteStatus = 11;
+  string lang = 12;
+  // gotags: json:"possibly_sensitive"
+  bool possiblySensitive = 13;
+  // gotags: json:"possibly_sensitive_editable"
+  bool possiblySensitiveEditable = 14;
+  // gotags: json:"quote_count"
+  int64 quoteCount = 15;
+  // gotags: json:"reply_count"
+  int64 replyCount = 16;
+  // gotags: json:"retweet_count"
+  int64 retweetCount = 17;
+  bool retweeted = 18;
+  // gotags: json:"user_id_str"
+  string userIdStr = 19;
+  // gotags: json:"id_str"
+  string idStr = 20;
+  // gotags: json:"quoted_status_id_str"
+  string quotedStatusIdStr = 21;
+  // gotags: json:"quoted_status_permalink"
+  QuotedStatusPermalink quotedStatusPermalink = 22;
+  // gotags: json:"retweeted_status_result"
+  RetweetedStatusResult retweetedStatusResult = 23;
+}
+
+message QuotedStatusPermalink {
+  string url = 1;
+  string expanded = 2;
+  string display = 3;
+}
+
+message RetweetedStatusResult {
+  RetweetedStatusResultDetail result = 1;
+}
+
+message RetweetedStatusResultDetail {
+  // gotags: json:"__typename"
+  string typename = 1;
+  // gotags: json:"rest_id"
+  string restId = 2;
+  TweetResultsResultCore core = 3;
+  // gotags: json:"edit_control"
+  EditControl editControl = 4;
+  // gotags: json:"is_translatable"
+  bool isTranslatable = 5;
+  Views views = 6;
+  string source = 7;
+  TweetLegacy legacy = 8;
+  // gotags: json:"previous_counts"
+  GraphPublicMetrics previousCounts = 9;
+  // gotags: json:"quoted_status_result"
+  QuotedStatusResult quotedStatusResult = 10;
+}
+
+message QuotedStatusResult {
+  QuotedStatusResultDetail result = 1;
+}
+
+message QuotedStatusResultDetail {
+  // gotags: json:"__typename"
+  string typename = 1;
+  // gotags: json:"rest_id"
+  string restId = 2;
+  TweetResultsResultCore core = 3;
+  // gotags: json:"edit_control"
+  EditControl editControl = 4;
+  // gotags: json:"is_translatable"
+  bool isTranslatable = 5;
+  Views views = 6;
+  string source = 7;
+  // gotags: json:"note_tweet"
+  NoteTweet noteTweet = 8;
+  QuotedRefResult quotedRefResult = 9;
+  TweetLegacy legacy = 10;
+}
+
+message QuotedRefResult {
+  QuotedRefResultDetail result = 1;
+}
+
+message QuotedRefResultDetail {
+  // gotags: json:"__typename"
+  string typename = 1;
+  // gotags: json:"rest_id"
+  string restId = 2;
+}
+
+message NoteTweet {
+  // gotags: json:"is_expandable"
+  bool isExpandable = 1;
+  // gotags: json:"note_tweet_results"
+  NoteTweetResults noteTweetResults = 2;
+}
+
+message NoteTweetResults {
+  NoteTweetResultsResult result = 1;
+}
+
+message NoteTweetResultsResult {
+  string id = 1;
+  string text = 2;
+  // gotags: json:"entity_set"
+  MediaEntities entitySet = 3;
+  Richtext richtext = 4;
+  InlineMediaData media = 5;
+}

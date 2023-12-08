@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package ay.twi.graphql.msg;
+
+option go_package = "twi-graphql/msg";
+option java_multiple_files = true;
+option java_package = "ay.twi.graphql.msg";
+option swift_prefix = "XGqlMsg";
+
+import "twi/component.proto";
+import "twi/user.proto";
+import "twi/tweet.proto";
+
+
+message Timeline {
+  repeated Instruction instructions = 1;
+  Metadata metadata = 2;
+}
+
+message Instruction {
+  string type = 1;
+  InstructionEntry entry = 2;
+  repeated InstructionEntry entries = 3;
+}
+
+message InstructionEntry {
+  string entryId = 1;
+  string sortIndex = 2;
+  InstructionEntryContent content = 3;
+}
+
+message InstructionEntryContent {
+  string entryType = 1;
+  // gotags: json:"__typename"
+  string typename = 2;
+  ItemContent itemContent = 3;
+  TextReferenceComponent header = 4;
+  TextReferenceComponent footer = 5;
+  repeated InstructionEntryContentItemsElement items = 6;
+  ClientEventInfo clientEventInfo = 7;
+  Metadata metadata = 8;
+  string displayType = 9;
+  string value = 10;
+  string cursorType = 11;
+}
+
+message ItemContent {
+  string itemType = 1;
+  // gotags: json:"__typename"
+  string typename = 2;
+  // gotags: json:"tweet_results"
+  TweetResults tweetResults = 3;
+  string tweetDisplayType = 4;
+  bool hasModeratedReplies = 5;
+  SocialContext socialContext = 6;
+  // gotags: json:"user_results"
+  UserResult userResults = 7;
+  string userDisplayType = 8;
+}
+
+message InstructionEntryContentItemsElement {
+  string entryId = 1;
+  InstructionEntryContentItemsElementItem item = 2;
+}
+
+message InstructionEntryContentItemsElementItem {
+  ItemContent itemContent = 1;
+  ClientEventInfo clientEventInfo = 2;
+}

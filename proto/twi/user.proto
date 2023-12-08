@@ -1,0 +1,165 @@
+syntax = "proto3";
+
+package ay.twi.graphql.msg;
+
+option go_package = "twi-graphql/msg";
+option java_multiple_files = true;
+option java_package = "ay.twi.graphql.msg";
+option swift_prefix = "XGqlMsg";
+
+import "google/protobuf/any.proto";
+import "twi/component.proto";
+
+
+message UserResult {
+  RawUser result = 1;
+}
+
+message RawUser {
+  // gotags: json:"__typename"`
+  string typename = 1;
+  UserLegacy legacy = 2;
+  // gotags: json:"rest_id"`
+  string restId = 3;
+  string id = 4;
+  // gotags: json:"affiliates_highlighted_label"`
+  AffiliatesHighlighted affiliatesHighlightedLabel = 5;
+  // gotags: json:"is_blue_verified"`
+  bool isBlueVerified = 6;
+  // gotags: json:"profile_image_shape"`
+  string profileImageShape = 7;
+  // gotags: json:"legacy_extended_profile"`
+  bytes legacyExtendedProfile = 8;
+  // gotags: json:"is_profile_translatable"`
+  bool isProfileTranslatable = 9;
+  // gotags: json:"has_graduated_access"`
+  bool hasGraduatedAccess = 10;
+  // gotags: json:"has_hidden_likes_on_profile"`
+  bool hasHiddenLikesOnProfile = 11;
+  // gotags: json:"has_hidden_subscriptions_on_profile"`
+  bool hasHiddenSubscriptionsOnProfile = 12;
+  // gotags: json:"verification_info"`
+  VerificationInfo verificationInfo = 13;
+  // gotags: json:"highlights_info"`
+  HighlightsInfo highlightsInfo = 14;
+  // gotags: json:"business_account"`
+  bytes businessAccount = 15;
+  // gotags: json:"creator_subscriptions_count"`
+  int64 creatorSubscriptionsCount = 16;
+  Professional professional = 17;
+  // gotags: json:"super_follow_eligible"`
+  bool superFollowEligible = 18;
+}
+
+message UserLegacy {
+  bool following = 1;
+  // gotags: json:"can_dm"`
+  bool canDm = 2;
+  // gotags: json:"can_media_tag"`
+  bool canMediaTag = 3;
+  // gotags: json:"created_at"`
+  string createdAt = 4;
+  // gotags: json:"default_profile"`
+  bool defaultProfile = 5;
+  // gotags: json:"default_profile_image"`
+  bool defaultProfileImage = 6;
+  string description = 7;
+  UserEntities entities = 8;
+  // gotags: json:"fast_followers_count"`
+  int64 fastFollowersCount = 9;
+  // gotags: json:"favourites_count"`
+  int64 favouritesCount = 10;
+  // gotags: json:"followers_count"`
+  int64 followersCount = 11;
+  // gotags: json:"friends_count"`
+  int64 friendsCount = 12;
+  // gotags: json:"has_custom_timelines"`
+  bool hasCustomTimelines = 13;
+  // gotags: json:"is_translator"`
+  bool isTranslator = 14;
+  // gotags: json:"listed_count"`
+  int64 listedCount = 15;
+  string location = 16;
+  // gotags: json:"media_count"`
+  int64 mediaCount = 17;
+  string name = 18;
+  // gotags: json:"normal_followers_count"`
+  int64 normalFollowersCount = 19;
+  // gotags: json:"pinned_tweet_ids_str"`
+  repeated string pinnedTweetIdsStr = 20;
+  // gotags: json:"possibly_sensitive"`
+  bool possiblySensitive = 21;
+  // gotags: json:"profile_banner_url"`
+  string profileBannerUrl = 22;
+  // gotags: json:"profile_image_url_https"`
+  string profileImageUrlHttps = 23;
+  // gotags: json:"profile_interstitial_type"`
+  string profileInterstitialType = 24;
+  // gotags: json:"screen_name"`
+  string screenName = 25;
+  // gotags: json:"statuses_count"`
+  int64 statusesCount = 26;
+  // gotags: json:"translator_type"`
+  string translatorType = 27;
+  string url = 28;
+  bool verified = 29;
+  // gotags: json:"verified_type"`
+  string verifiedType = 30;
+  // gotags: json:"withheld_in_countries"`
+  bytes withheldInCountries = 31;
+}
+
+message UserEntities {
+  Urls description = 1;
+  Urls url = 2;
+}
+
+message Urls {
+  repeated Url urls = 1;
+}
+
+message Professional {
+  // gotags: json:"rest_id"`
+  string restId = 1;
+  // gotags: json:"professional_type"`
+  string professionalType = 2;
+  repeated google.protobuf.Any category = 3;
+}
+
+message VerificationInfo {
+  // gotags: json:"is_identity_verified"
+  bool isIdentityVerified = 1;
+  VerificationInfoReason reason = 2;
+}
+
+message VerificationInfoReason {
+  VerificationInfoReasonDescription description = 1;
+  // gotags: json:"verified_since_msec"
+  string verifiedSinceMsec = 2;
+}
+
+message VerificationInfoReasonDescription {
+  string text = 1;
+  repeated VerificationInfoReasonDescriptionEntity entities = 2;
+}
+
+message VerificationInfoReasonDescriptionEntity {
+  // gotags: json:"from_index"
+  int64 fromIndex = 1;
+  // gotags: json:"to_index"
+  int64 toIndex = 2;
+  VerificationInfoReasonDescriptionEntityRef ref = 3;
+}
+
+message VerificationInfoReasonDescriptionEntityRef {
+  string url = 1;
+  // gotags: json:"url_type"
+  string urlType = 2;
+}
+
+message HighlightsInfo {
+  // gotags: json:"can_highlight_tweets"
+  bool canHighlightTweets = 1;
+  // gotags: json:"highlighted_tweets"
+  string highlightedTweets = 2;
+}

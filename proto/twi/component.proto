@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package ay.twi.graphql.msg;
+
+option go_package = "twi-graphql/msg";
+option java_multiple_files = true;
+option java_package = "ay.twi.graphql.msg";
+option swift_prefix = "XGqlMsg";
+
+
+message Url {
+  // gotags: json:"display_url"
+  string displayUrl = 1;
+  // gotags: json:"expanded_url"
+  string expandedUrl = 2;
+  string url = 3;
+  repeated int64 indices = 4;
+
+  string type = 5;
+  string urlType = 6;
+}
+
+message UserMention {
+  // gotags: json:"id_str"
+  string idStr = 1;
+  string name = 2;
+  // gotags: json:"screen_name"
+  string screenName = 3;
+  repeated int64 indices = 4;
+}
+
+message Hashtag {
+  repeated int64 indices = 1;
+  string text = 2;
+}
+
+message Symbol {
+  repeated int64 indices = 1;
+  string text = 2;
+}
+
+message Views {
+  string count = 1;
+  string state = 2;
+}
+
+message EditControl {
+  // gotags: json:"edit_tweet_ids"
+  repeated string editTweetIds = 1;
+  // gotags: json:"editable_until_msecs"
+  string editableUntilMsecs = 2;
+  // gotags: json:"is_edit_eligible"
+  bool isEditEligible = 3;
+  // gotags: json:"edits_remaining"
+  string editsRemaining = 4;
+
+  // gotags: json:"initial_tweet_id"
+  string initialTweetId = 5;
+  // gotags: json:"edit_control_initial"
+  bytes editControlInitial = 6;
+}
+
+// -------------------------------------------------- //
+
+message AffiliatesHighlighted {
+  AffiliatesHighlightedLabel label = 1;
+}
+
+message AffiliatesHighlightedLabel {
+  message Url {
+    string url = 1;
+    string urlType = 2;
+  }
+
+  message Badge {
+    string url = 1;
+  }
+
+  Url url = 1;
+  Badge badge = 2;
+  string description = 3;
+  string userLabelType = 4;
+  string userLabelDisplayType = 5;
+}
+
+message ClientEventInfo {
+  string component = 1;
+  string element = 2;
+  ClientEventInfoDetails details = 3;
+}
+
+message ClientEventInfoDetails {
+  TimelinesDetails timelinesDetails = 1;
+}
+
+message TimelinesDetails {
+  string injectionType = 1;
+  string controllerData = 2;
+  string sourceData = 3;
+}
+
+message Metadata {
+  ScribeConfig scribeConfig = 1;
+  ConversationMetadata conversationMetadata = 2;
+}
+
+message ScribeConfig {
+  string page = 1;
+}
+
+message ConversationMetadata {
+  repeated string allTweetIds = 1;
+  bool enableDeduplication = 2;
+}
+
+// -------------------------------------------------- //
+
+message Richtext {
+  // gotags: json:"richtext_tags"
+  repeated RichtextTag richtextTags = 1;
+}
+
+message RichtextTag {
+  // gotags: json:"from_index"
+  int64 fromIndex = 1;
+  // gotags: json:"to_index"
+  int64 toIndex = 2;
+  // gotags: json:"richtext_types"
+  repeated string richtextTypes = 3;
+}
+
+message TextReferenceComponent {
+  string displayType = 1;
+  string text = 2;
+  bool sticky = 3;
+  Url landingUrl = 4;
+  repeated ReferenceElement entities = 5;
+}
+
+message ReferenceElement {
+  int64 fromIndex = 1;
+  int64 toIndex = 2;
+  Url ref = 3;
+}
+
+message GraphPublicMetrics {
+  // gotags: json:"bookmark_count"`
+  int64 bookmarkCount = 1;
+  // gotags: json:"favorite_count"`
+  int64 favoriteCount = 2;
+  // gotags: json:"quote_count"`
+  int64 quoteCount = 3;
+  // gotags: json:"reply_count"`
+  int64 replyCount = 4;
+  // gotags: json:"retweet_count"`
+  int64 retweetCount = 5;
+}
+
+message SocialContext {
+  string type = 1;
+  string contextType = 2;
+  string text = 3;
+}
+
+message QuickPromoteEligibility {
+  string eligibility = 1;
+}

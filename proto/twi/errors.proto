@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package ay.twi.graphql.msg;
+
+option go_package = "twi-graphql/msg";
+option java_multiple_files = true;
+option java_package = "ay.twi.graphql.msg";
+option swift_prefix = "XGqlMsg";
+
+import "google/protobuf/any.proto";
+
+
+message ErrorRsp {
+  string message = 1;
+  ErrorLocation locations = 2;
+  google.protobuf.Any path = 3;
+  ErrorExtensions extensions = 4;
+  int64 code = 5;
+  string kind = 6;
+  string name = 7;
+  string source = 8;
+  // gotags: json:"retry_after"
+  int64 retryAfter = 9;
+  ErrorTracing tracing = 10;
+}
+
+message ErrorLocation {
+  int64 line = 1;
+  int64 column = 2;
+}
+
+message ErrorExtensions {
+  string name = 1;
+  string source = 2;
+  // gotags: json:"retry_after"
+  int64 retryAfter = 3;
+  int64 code = 4;
+  string kind = 5;
+  ErrorTracing tracing = 6;
+}
+
+message ErrorTracing {
+  // gotags: json:"trace_id"
+  string traceId = 1;
+}
